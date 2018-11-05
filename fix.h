@@ -65,6 +65,13 @@ makeFixMakeFromFixDeclaration(16, 8, 32, 16);
 makeFixMakeFromFixDeclaration(32, 16, 16, 16);
 makeFixMakeFromFixDeclaration(32, 16, 16, 8);
 
+// Some no-op conversions needed by other macros.
+#define fix_16_16_makeFromFix_16_16
+#define fix_16_8_makeFromFix_16_8
+#define fix_32_16_makeFromFix_32_16
+#define fix_32_0_makeFromFix_32_0
+#define fix_16_0_makeFromFix_16_0
+
 #define makeFixAddDeclaration(aNumBits, aFractionBits, bNumBits, bFractionBits) \
 FixTypeName(aNumBits, aFractionBits) FixFunctionName(aNumBits, aFractionBits, add##_##bNumBits##_##bFractionBits)(FixTypeName(aNumBits, aFractionBits) a, FixTypeName(bNumBits, bFractionBits) b)
 
@@ -77,5 +84,18 @@ makeFixAddDeclaration(16, 8, 32, 16);
 makeFixAddDeclaration(32, 16, 32, 16);
 makeFixAddDeclaration(32, 16, 16, 16);
 makeFixAddDeclaration(32, 16, 16, 8);
+
+#define makeFixMultuplyDeclaration(aNumBits, aFractionBits, bNumBits, bFractionBits) \
+FixTypeName(aNumBits, aFractionBits) FixFunctionName(aNumBits, aFractionBits, multiply##_##bNumBits##_##bFractionBits)(FixTypeName(aNumBits, aFractionBits) a, FixTypeName(bNumBits, bFractionBits) b)
+
+makeFixMultuplyDeclaration(16, 16, 16, 16);
+makeFixMultuplyDeclaration(16, 16, 16, 8);
+makeFixMultuplyDeclaration(16, 16, 32, 16);
+makeFixMultuplyDeclaration(16, 8, 16, 8);
+makeFixMultuplyDeclaration(16, 8, 16, 16);
+makeFixMultuplyDeclaration(16, 8, 32, 16);
+makeFixMultuplyDeclaration(32, 16, 32, 16);
+makeFixMultuplyDeclaration(32, 16, 16, 16);
+makeFixMultuplyDeclaration(32, 16, 16, 8);
 
 #endif

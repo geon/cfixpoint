@@ -102,3 +102,23 @@ makeFixAdd(16, 8, 32, 16);
 makeFixAdd(32, 16, 32, 16);
 makeFixAdd(32, 16, 16, 16);
 makeFixAdd(32, 16, 16, 8);
+
+typedef int16_t times2_8;
+typedef int32_t times2_16;
+typedef int64_t times2_32;
+#define makeFixMultuply(aNumBits, aFractionBits, bNumBits, bFractionBits) \
+makeFixMultuplyDeclaration(aNumBits, aFractionBits, bNumBits, bFractionBits) {\
+	times2_##aNumBits aUnwrapped = FixFunctionName(aNumBits, aFractionBits, unwrap)(a); \
+	times2_##aNumBits bUnwrapped = FixFunctionName(aNumBits, aFractionBits, unwrap)( FixFunctionName(aNumBits, aFractionBits, makeFromFix##_##bNumBits##_##bFractionBits)(b)); \
+	return FixFunctionName(aNumBits, aFractionBits, wrap)((aUnwrapped * bUnwrapped) >> aFractionBits); \
+}
+
+makeFixMultuply(16, 16, 16, 16);
+makeFixMultuply(16, 16, 16, 8);
+makeFixMultuply(16, 16, 32, 16);
+makeFixMultuply(16, 8, 16, 8);
+makeFixMultuply(16, 8, 16, 16);
+makeFixMultuply(16, 8, 32, 16);
+makeFixMultuply(32, 16, 32, 16);
+makeFixMultuply(32, 16, 16, 16);
+makeFixMultuply(32, 16, 16, 8);

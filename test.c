@@ -75,6 +75,31 @@ bool Addition_out_of_range_should_not_work () {
 	return fabs(floatC - fix_16_16_toFloat(fixC)) > 0.001;
 }
 
+bool Multiplication_should_work () {
+
+	float floatA = 1.23456789;
+	float floatB = 9.87654321;
+	float floatC = floatA * floatB;
+
+	Fix_32_16 fixA = fix_32_16_fromFloat(floatA);
+	Fix_32_16 fixB = fix_32_16_fromFloat(floatB);
+	Fix_32_16 fixC = fix_32_16_multiply_32_16(fixA, fixB);
+
+	return fabs(floatC - fix_32_16_toFloat(fixC)) < 0.001;
+}
+
+bool Multiplication_should_work_2 () {
+
+	Fix_32_16 fixA = fix_32_16_fromFloat(123.456789);
+	float floatA = fix_32_16_toFloat(fixA);
+
+	float floatB = floatA * floatA;
+	Fix_32_16 fixB = fix_32_16_multiply_32_16(fixA, fixA);
+
+	return fabs(floatB - fix_32_16_toFloat(fixB)) < 0.001;
+}
+
+
 #define runTest(testName) \
 if (!testName()) { \
 	printf("%s\n", #testName); \
@@ -90,6 +115,8 @@ int main(int argc, char *args[]) {
 	runTest(Addition_should_work)
 	runTest(Addition_should_work_2)
 	runTest(Addition_out_of_range_should_not_work)
+	runTest(Multiplication_should_work)
+	runTest(Multiplication_should_work_2)
 
 	printf("All tests passed.\n");
 	return 0;
